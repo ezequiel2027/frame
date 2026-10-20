@@ -1,19 +1,11 @@
 import Header from "./components/Header/Header";
 import ProdutoCard from "./components/ProdutoCard/ProdutoCard";
 import "./App.css";
-import { useState } from "react"
-import Contador from "./components/Contador/Contador";
-
 
 const curso = "Desenvolvimento Web";
 const tecnologia = "React";
 
-
-
-
 function App() {
-
-      
   const produtos = [
     {
       nome: "Smartphone",
@@ -43,48 +35,18 @@ function App() {
 
   return (
     <div className="app">
-
       <Header />
 
       <main>
-
-    
-
         <section className="apresentacao">
-
-          <main>
-
-  <section className="apresentacao">
-    ...
-  </section>
-
-  <Contador />
-
-  <section className="produtos">
-    ...
-  </section>
-
-</main>
-
-
-         
-
-          <p>
-            Curso: {curso}
-          </p>
-
-          <p>
-            Meu primeiro projeto utilizando {tecnologia}.
-          </p>
-
+          <p>Curso: {curso}</p>
+          <p>Meu primeiro projeto utilizando {tecnologia}.</p>
         </section>
 
         <section className="produtos">
-
           <h2>Produtos em destaque</h2>
 
           <div className="produtos-grid">
-
             {produtos.map((produto) => (
               <ProdutoCard
                 key={produto.nome}
@@ -94,13 +56,9 @@ function App() {
                 categoria={produto.categoria}
               />
             ))}
-
           </div>
-
         </section>
-
       </main>
-
     </div>
   );
 }
