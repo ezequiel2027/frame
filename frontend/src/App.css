@@ -1,0 +1,36 @@
+/* Área de apresentação */
+
+.apresentacao {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.apresentacao h1 {
+  margin-bottom: 15px;
+}
+
+.apresentacao p {
+  margin: 5px 0;
+}
+
+
+/* Área dos produtos */
+
+.produtos {
+  padding: 30px 50px;
+}
+
+.produtos h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+
+/* Grade de produtos */
+
+.produtos-grid {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
