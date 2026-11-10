@@ -1,19 +1,27 @@
-// ============================================================
-// FRAMEWORKS 1 — DESAFIO 2
-// BACK-END — API DE PRODUTOS
+// FRAMEWORKS 1 - IFMS NAVIRAÍ
+// DESAFIO 3 - INTEGRAÇÃO COM MONGODB LOCAL
+// Professor: Ezequiel Pereira
 //
-// Complete somente os espaços indicados por TODO.
-// ============================================================
+// O servidor começa com a API do Desafio 2 funcionando.
+// Descomente os passos em ordem e TESTE antes de avançar.
 
 const express = require("express");
 const cors = require("cors");
 
+// ATIVIDADE 1 — Importar Mongoose e o modelo Produto.
+// Defina também MONGODB_URI para o banco local site_vendas.
+// ESCREVA AQUI:
+
+
+
 const app = express();
 const PORT = 3000;
 
+// Permite a comunicação do React/Vite com esta API.
 app.use(cors());
 
-// Os produtos já estão preparados para esta atividade.
+// BASE DO DESAFIO 2: array temporário.
+// No PASSO 5, deixe de usar este array na rota GET.
 const produtos = [
   {
     id: 1,
@@ -45,30 +53,34 @@ const produtos = [
   }
 ];
 
-// TODO 1 — BACK-END:
-// Crie uma rota GET para "/".
-// Ela deve responder:
-// "API do Site de Vendas funcionando!"
-//
+// ATIVIDADE 2 — Conectar ao MongoDB local com mongoose.connect().
+// Informe no console se a conexão funcionou ou falhou.
 // ESCREVA AQUI:
 
 
+app.get("/", (req, res) => {
+  res.send("API do Site de Vendas funcionando!");
+});
 
+// GET /api/produtos será consumido pelo React.
+app.get("/api/produtos", (req, res) => {
+  res.json(produtos);
+});
 
-// TODO 2 — BACK-END:
-// Crie uma rota GET para "/api/produtos".
-// Ela deve devolver o array produtos em formato JSON.
-//
+// ATIVIDADE 5 — Substituir a rota antiga pela consulta ao MongoDB.
+// Somente depois do seed, comente a rota GET acima.
+// Crie GET /api/produtos usando async/await e Produto.find().
+// Envie JSON e trate erros com status 500.
 // ESCREVA AQUI:
 
 
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
+  console.log(`Produtos: http://localhost:${PORT}/api/produtos`);
+});
 
-
-// TODO 3 — BACK-END:
-// Inicie o servidor utilizando a porta definida em PORT.
-// Mostre no terminal uma mensagem informando o endereço do servidor.
-//
-// ESCREVA AQUI:
-
-
-
+// TESTE FINAL (após completar as atividades):
+// 1. npm run seed, no backend, com MongoDB ligado.
+// 2. npm start, no backend.
+// 3. Abra http://localhost:3000/api/produtos.
+// 4. Confira os cards no frontend sem modificar App.jsx.

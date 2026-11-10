@@ -1,35 +1,26 @@
+// DESAFIO 3 — BASE PRONTA: o React já consome a API do Desafio 2.
+// Nesta aula, NÃO é necessário modificar o front-end.
 import Header from "./components/Header/Header";
 import ProdutoCard from "./components/ProdutoCard/ProdutoCard";
 import "./App.css";
 
 // ============================================================
-// FRAMEWORKS 1 — DESAFIO 2
-// REACT CONSUMINDO UMA API
+// DESAFIO 3 - REACT JÁ CONSUMINDO NOSSA API
+// MATERIAL DO PROFESSOR
 //
-// Complete somente os espaços indicados por TODO.
-// Não altere os componentes Header e ProdutoCard.
+// Integração do Desafio 2 já concluída; não alterar neste desafio.
 // ============================================================
 
-// TODO 1:
-// Importe do React os dois Hooks necessários nesta etapa.
-// Dica: precisaremos de um Hook para guardar os produtos
-// e outro para executar a busca quando o componente carregar.
-//
-// ESCREVA AQUI:
-
+// IMPORTAÇÃO ATIVA DESDE O DESAFIO 2:
+import { useEffect, useState } from "react";
 
 const curso = "Desenvolvimento Web";
 const tecnologia = "React";
 
 function App() {
 
-  // ==========================================================
-  // O array abaixo representa a etapa anterior do projeto.
-  //
-  // TODO 2:
-  // Quando você criar o State dos produtos, comente este array.
-  // ==========================================================
-
+  // HISTÓRICO: array local da etapa anterior (desativado).
+  /* ARRAY LOCAL DO DESAFIO 1 — SUBSTITUÍDO PELO STATE
   const produtos = [
     {
       nome: "Smartphone",
@@ -56,30 +47,40 @@ function App() {
       imagem: "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
     }
   ];
+  */
 
-  // TODO 3:
-  // Crie um State chamado produtos.
-  // O valor inicial deve ser um array vazio.
+  // ==========================================================
+  // STATE DOS PRODUTOS — JÁ ATIVO
+  // O array acima já está comentado:
   //
-  // ESCREVA AQUI:
-
-
-  // TODO 4:
-  // Crie um useEffect que seja executado quando o componente carregar.
+  const [produtos, setProdutos] = useState([]);
   //
-  // Dentro dele:
-  // 1. faça uma requisição para:
-  //    http://localhost:3000/api/produtos
-  // 2. converta a resposta para JSON;
-  // 3. receba os dados;
-  // 4. atualize o State produtos;
-  // 5. mostre os dados no console para testar;
-  // 6. trate um possível erro com catch().
+  // O array começa vazio porque os dados virão da API.
+  // ==========================================================
+
+  // ==========================================================
+  // BUSCA NA API — JÁ ATIVA
+  // Endpoint para testar:
+  // http://localhost:3000/api/produtos
   //
-  // ESCREVA AQUI:
-
-
-
+  useEffect(() => {
+    fetch("http://localhost:3000/api/produtos")
+      .then((resposta) => resposta.json())
+      .then((dados) => {
+        console.log("Produtos recebidos da API:", dados);
+        setProdutos(dados);
+      })
+      .catch((erro) => {
+        console.error("Erro ao buscar produtos:", erro);
+      });
+  }, []);
+  //
+  // fetch()       -> faz a requisição HTTP
+  // .json()       -> converte a resposta
+  // dados         -> produtos recebidos
+  // setProdutos() -> atualiza o State
+  // []            -> executa quando o componente carregar
+  // ==========================================================
 
   return (
     <div className="app">
@@ -97,10 +98,8 @@ function App() {
           <div className="produtos-grid">
             {produtos.map((produto) => (
               <ProdutoCard
-                // TODO 5:
-                // Depois que os produtos vierem da API,
-                // altere a key para utilizar o id do produto.
-                key={produto.nome}
+                // A key já usa o id fornecido pela API.
+                key={produto.id}
                 imagem={produto.imagem}
                 nome={produto.nome}
                 preco={produto.preco}
